@@ -1,0 +1,41 @@
+{
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "editor.formatOnSave": false,
+    "javascript.format.enable": false,
+    "eslint.format.enable": true,
+    "eslint.codeActionsOnSave.mode": "all",
+    "eslint.alwaysShowStatus": true,
+    "eslint.validate": [
+        "javascript"
+    ],
+    "eslint.options": {
+        "extensions": [
+            ".js"
+        ]
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "html.format.endWithNewline": true,
+    "eslint.workingDirectories": [
+        "js"
+    ],
+    "search.exclude": {
+        "js/phaser.min.js": true,
+        "README.md": true,
+        "package.json": true,
+        "package-lock.json": true,
+        ".eslintignore": true,
+        ".eslintrc.js": true,
+        ".gitattributes": true,
+        "assets/**/*": true
+    }
+}

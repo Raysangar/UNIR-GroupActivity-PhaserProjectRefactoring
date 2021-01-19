@@ -1,0 +1,4 @@
+.eslintrc.js
+js/phaser.min.js
+node_modules/**/*
+res/**/*
