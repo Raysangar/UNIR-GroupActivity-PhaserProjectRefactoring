@@ -43,19 +43,20 @@ export class MainScene extends Phaser.Scene {
                 this.physics.add.overlap(seta, this.player, this.spriteHit, null, this);
             }
         }
-        this.score = 1;
+        this.score = 0;
         this.scoreText = this.add.text(16, 16, 'PUNTOS: ' + this.score, {
             fontSize: '20px',
             fill: '#000',
             fontFamily: 'verdana, arial, sans-serif'
         });
-
+        this.scoreText.setScrollFactor(0);
     }
 
     spriteHit(sprite1 /* , sprite2 */ ) {
 
         sprite1.destroy();
-
+        this.score++;
+        this.scoreText.setText('PUNTOS: ' + this.score);
     }
 
     update(time, delta) {
