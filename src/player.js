@@ -6,7 +6,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.scene.physics.add.existing(this);
         //continuación
         this.cursor = this.scene.input.keyboard.createCursorKeys();
-
+        this.body.setSize(this.width * .3, this.height * .75);
+        this.body.setOffset((this.width - this.body.width) * .5, this.height * .25);
 
         this.anims.create({
             key: 'walk',
