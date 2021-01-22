@@ -1,20 +1,21 @@
-import { MainScene } from './MainScene';
+import Level1 from './scenes/Level1/Level1';
 
 const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 480,
-    parent: "canvas",
+    parent: 'canvas',
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    scene: MainScene,
+    scene: Level1,
     physics: {
         default: 'arcade',
         arcade: {
             gravity: { y: 200 },
-            debug: true
-        }
-    }
+            debug: true,
+        },
+    },
 };
 
+// eslint-disable-next-line no-new
 new Phaser.Game(config);

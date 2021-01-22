@@ -24,18 +24,17 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
-    "html.format.endWithNewline": true,
-    "eslint.workingDirectories": [
-        "js"
-    ],
+    "eslint.workingDirectories": ["src"],
+    "files.insertFinalNewline": false,
+    "files.trimFinalNewlines": true,
     "search.exclude": {
-        "js/phaser.min.js": true,
         "README.md": true,
         "package.json": true,
         "package-lock.json": true,
         ".eslintignore": true,
         ".eslintrc.js": true,
-        ".gitattributes": true,
-        "assets/**/*": true
-    }
+        ".gitattributes": true
+    },
+    "editor.detectIndentation": false,
+    "html.format.endWithNewline": false
 }
