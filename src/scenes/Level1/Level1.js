@@ -1,24 +1,35 @@
 import Player from '../../player/Player';
-import Mushroom from '../../mushroom/Mushroom';
+import Mushroom from '../../powerup/mushroom/Mushroom';
 
 export default class Level1 extends Phaser.Scene {
-    preload() {
-        this.load.image('tiles', 'src/scenes/Level1/background/tileset.png');
-        this.load.spritesheet('tilesSprites', 'src/scenes/Level1/background/tileset.png', { frameWidth: 32, frameHeight: 32 });
-        this.load.tilemapTiledJSON('map', 'src/scenes/Level1/background/config.json');
-        this.load.image('background', 'src/scenes/Level1/background/sky.png');
-        this.load.image('sea', 'src/scenes/Level1/background/sea.png');
+    constructor() {
+        super({
+            key: 'Level1',
+        });
+    }
 
-        this.load.image('player', 'src/player/animation/idle.png');
-        this.load.atlas('playerSprites', 'src/player/animation/spritesheet.png', 'src/player/animation/config.json');
+    preload() {
+        this.music = this.sound.add('level1Music');
+        this.scoreMusic = this.sound.add('score');
+        this.powerup = this.sound.add('powerup');
     }
 
     create() {
-        const background = this.add.tileSprite(0, 0, 800 * 2, 480 * 2, 'background');
+        const background = this.add.tileSprite(0, 0, this.sys.game.config.height * 2, this.sys.game.config.width * 2, 'level1Background');
         background.fixedToCamera = true;
         this.player = new Player(this, 50, 100);
         const map = this.make.tilemap({ key: 'map' });
         const tiles = map.addTilesetImage('Plataformas', 'tiles');
+
+        // UI. Fondo negro de la parte superior
+        this.add.graphics()
+            .fillStyle(0x000000)
+            .fillRect(
+                0,
+                0,
+                this.sys.game.config.width,
+                16,
+            );
 
         const layer = map.createLayer('Suelo', tiles, 0, 0);
         // enable collisions for every tile
@@ -29,28 +40,26 @@ export default class Level1 extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
         this.objetos = map.getObjectLayer('objetos').objects;
-        this.setas = [];
+        this.mushrooms = [];
         for (let i = 0; i < this.objetos.length; i++) {
             const obj = this.objetos[i];
             if (obj.gid === 115) {
-                const seta = new Mushroom(this, obj.x, obj.y);
-                this.setas.push(seta);
-                this.physics.add.overlap(seta, this.player, this.spriteHit, null, this);
+                const mushroom = new Mushroom(this, obj.x, obj.y);
+                this.mushrooms.push(mushroom);
+                this.physics.add.overlap(mushroom, this.player, this.spriteHit, null, this);
             }
         }
         this.score = 0;
-        this.scoreText = this.add.text(16, 16, `PUNTOS: ${this.score}`, {
-            fontSize: '20px',
-            fill: '#000',
-            fontFamily: 'verdana, arial, sans-serif',
-        });
+        this.scoreText = this.add.bitmapText(8, 8, 'font', `SCORE: ${this.score}`);
         this.scoreText.setScrollFactor(0);
+        this.music.play();
     }
 
     spriteHit(sprite1) {
         sprite1.destroy();
         this.score++;
-        this.scoreText.setText(`PUNTOS: ${this.score}`);
+        this.powerup.play();
+        this.scoreText.setText(`SCORE: ${this.score}`);
     }
 
     update(time, delta) {

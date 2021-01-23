@@ -1,3 +1,5 @@
+import Boot from './scenes/Boot/Boot';
+import Start from './scenes/Start/Start';
 import Level1 from './scenes/Level1/Level1';
 
 const config = {
@@ -7,7 +9,6 @@ const config = {
     parent: 'canvas',
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    scene: Level1,
     physics: {
         default: 'arcade',
         arcade: {
@@ -15,6 +16,11 @@ const config = {
             debug: true,
         },
     },
+    scene: [
+        Boot,
+        Start,
+        Level1,
+    ],
 };
 
 // eslint-disable-next-line no-new

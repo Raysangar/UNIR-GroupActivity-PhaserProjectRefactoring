@@ -4,6 +4,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.scene = scene;
 
+        this.jumpSound = this.scene.sound.add('jump');
+
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
 
@@ -45,6 +47,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
         if (this.cursor.space.isDown && this.body.onFloor()) {
             this.setVelocityY(-10 * delta);
+            this.jumpSound.play();
         }
 
         if (!this.body.onFloor()) {
