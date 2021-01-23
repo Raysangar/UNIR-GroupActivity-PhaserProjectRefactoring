@@ -44,17 +44,19 @@ export default class Boot extends Phaser.Scene {
         this.load.audio('score', 'src/scenes/score.mp3');
         this.load.audio('jump', 'src/player/jump.mp3');
         this.load.audio('powerup', 'src/powerup/powerup.wav');
+        this.load.audio('coin', 'src/coin/coin.wav');
         this.load.audio('gameover', 'src/scenes/gameover.mp3');
         this.load.image('startBackground', 'src/scenes/Start/background.jpg');
         this.load.image('tiles', 'src/scenes/Level1/background/tileset.png');
         this.load.spritesheet('tilesSprites', 'src/scenes/Level1/background/tileset.png', { frameWidth: 32, frameHeight: 32 });
         this.load.tilemapTiledJSON('map', 'src/scenes/Level1/background/config.json');
         this.load.image('level1Background', 'src/scenes/Level1/background/sky.png');
-        this.load.image('sea', 'src/scenes/Level1/background/sea.png');
 
         this.load.bitmapFont('font', 'src/scenes/font.png', 'src/scenes/font.fnt');
 
         this.load.image('player', 'src/player/animation/idle.png');
         this.load.atlas('playerSprites', 'src/player/animation/spritesheet.png', 'src/player/animation/config.json');
+
+        this.load.atlas('coinSprites', 'src/coin/animation/spritesheet.png', 'src/coin/animation/config.json');
     }
 }
