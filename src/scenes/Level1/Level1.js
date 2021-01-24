@@ -41,7 +41,13 @@ export default class Level1 extends Phaser.Scene {
 
     loadBackground() {
         this.add
-            .tileSprite(0, 0, this.cameras.main.width * 2, this.cameras.main.height * 2, 'level1Background')
+            .tileSprite(
+                0,
+                0,
+                this.cameras.main.width * 2,
+                this.cameras.main.height * 2,
+                'level1Background',
+            )
             .setScrollFactor(0);
     }
 
@@ -68,7 +74,6 @@ export default class Level1 extends Phaser.Scene {
         this.physics.add.collider(this.player, this.layer);
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.cameras.main.startFollow(this.player);
-        this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     }
 
     loadUI(score) {

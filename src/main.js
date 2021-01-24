@@ -6,6 +6,7 @@ const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 480,
+    pixelArt: true,
     parent: 'canvas',
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
