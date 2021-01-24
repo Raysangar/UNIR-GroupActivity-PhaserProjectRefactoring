@@ -46,8 +46,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         if (this.cursor.space.isDown && this.body.onFloor()) {
-            this.setVelocityY(-15 * delta);
-            this.jumpSound.play();
+            this.jump(delta);
         }
 
         if (!this.body.onFloor()) {
@@ -57,5 +56,10 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         } else {
             this.play('idle', true);
         }
+    }
+
+    jump(delta) {
+        this.setVelocityY(-15 * delta);
+        this.jumpSound.play();
     }
 }

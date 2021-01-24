@@ -19,6 +19,7 @@ module.exports = {
         "indent": ["error", 4],
         "eol-last": ["error", "never"],
         "no-plusplus": ["off"],
-        "class-methods-use-this": ["off"]
+        "class-methods-use-this": ["off"],
+        "max-len": ["error", 170]
     }
 };

@@ -1,4 +1,4 @@
-export default class Class extends Phaser.Physics.Arcade.Sprite {
+export default class FireGuy extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
         super(scene, x + 16, y - 16);
         this.scene = scene;
@@ -8,11 +8,11 @@ export default class Class extends Phaser.Physics.Arcade.Sprite {
         this.body.allowGravity = false;
 
         this.anims.create({
-            key: 'idle',
-            frames: this.scene.anims.generateFrameNames('coinSprites', { start: 1, end: 4, prefix: 'idle-' }),
+            key: 'walk',
+            frames: this.scene.anims.generateFrameNames('fireGuySprites', { start: 1, end: 4, prefix: 'walk-' }),
             frameRate: 10,
             repeat: -1,
         });
-        this.play('idle', true);
+        this.play('walk', true);
     }
 }

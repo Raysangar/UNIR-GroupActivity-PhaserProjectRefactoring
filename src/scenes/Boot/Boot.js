@@ -58,5 +58,7 @@ export default class Boot extends Phaser.Scene {
         this.load.atlas('playerSprites', 'src/player/animation/spritesheet.png', 'src/player/animation/config.json');
 
         this.load.atlas('coinSprites', 'src/coin/animation/spritesheet.png', 'src/coin/animation/config.json');
+
+        this.load.atlas('shyGuySprites', 'src/enemy/ShyGuy/spritesheet.png', 'src/enemy/ShyGuy/config.json');
     }
 }
