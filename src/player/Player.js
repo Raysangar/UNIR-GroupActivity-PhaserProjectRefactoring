@@ -9,7 +9,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
-        
+
         this.cursor = this.scene.input.keyboard.createCursorKeys();
         this.body.setSize(this.width * 0.3, this.height * 0.75);
         this.body.setOffset((this.width - this.body.width) * 0.5, this.height * 0.25);
@@ -47,8 +47,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityX(0);
         }
 
-        if (this.body.onFloor())
-        {
+        if (this.body.onFloor()) {
             this.isJumping = false;
         }
 

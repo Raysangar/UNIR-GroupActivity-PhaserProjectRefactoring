@@ -132,11 +132,9 @@ export default class Level1 extends Phaser.Scene {
         this.scoreText.setText(`SCORE: ${this.score}`);
     }
 
-    destroyObject(object)
-    {
-        for( var i = 0; i < this.updateObjects.length; i++){ 
-            if ( this.updateObjects[i] === object)
-                this.updateObjects.splice(i, 1); 
+    destroyObject(object) {
+        for (let i = 0; i < this.updateObjects.length; i++) {
+            if (this.updateObjects[i] === object) { this.updateObjects.splice(i, 1); }
         }
         object.destroy();
     }

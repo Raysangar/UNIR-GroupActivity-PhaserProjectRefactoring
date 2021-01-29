@@ -16,8 +16,7 @@ export default class Class extends Phaser.Physics.Arcade.Sprite {
         this.play('idle', true);
     }
 
-    OnHit()
-    {
+    OnHit() {
         this.scene.increaseScore();
         this.scene.destroyObject(this);
     }
