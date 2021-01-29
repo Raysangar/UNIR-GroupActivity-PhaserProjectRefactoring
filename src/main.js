@@ -1,6 +1,7 @@
 import Boot from './scenes/Boot/Boot';
 import Start from './scenes/Start/Start';
 import Level1 from './scenes/Level1/Level1';
+import GameOver from './scenes/GameOver/GameOver';
 
 const config = {
     type: Phaser.AUTO,
@@ -21,6 +22,7 @@ const config = {
         Boot,
         Start,
         Level1,
+        GameOver,
     ],
 };
 

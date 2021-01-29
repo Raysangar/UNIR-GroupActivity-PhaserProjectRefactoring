@@ -10,6 +10,7 @@ export default class Level1 extends Phaser.Scene {
         });
         this.updateObjects = []; // Objetos que tienen un update()
         this.delta = 0;
+        this.gameFinished = false;
     }
 
     preload() {
@@ -21,6 +22,7 @@ export default class Level1 extends Phaser.Scene {
         this.music = this.sound.add('level1Music', { loop: true });
         this.powerupMusic = this.sound.add('powerup');
         this.coinMusic = this.sound.add('coin');
+        this.gameOverSound = this.sound.add('gameover');
     }
 
     create() {
@@ -31,11 +33,10 @@ export default class Level1 extends Phaser.Scene {
         this.updateObjects.push(this.player);
         this.loadPhysics();
         this.loadUI();
-        // this.sys.animatedTiles.init(this.map);
 
-        this.loadItem('Coin', this.coinHit, Coin);
-        this.loadItem('PowerUp', this.powerUpHit, Mushroom);
-        this.loadItem('ShyGuy', this.shyGuyHit, ShyGuy);
+        this.loadItem('Coin', Coin);
+        this.loadItem('PowerUp', Mushroom);
+        this.loadItem('ShyGuy', ShyGuy);
     }
 
     update(time, delta) {
@@ -84,7 +85,6 @@ export default class Level1 extends Phaser.Scene {
     }
 
     loadPhysics() {
-        this.physics.add.collider(this.player, this.layer);
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels - 1);
         this.cameras.main.startFollow(this.player, false, 1, 0, 0, -500);
     }
@@ -106,7 +106,7 @@ export default class Level1 extends Phaser.Scene {
         this.scoreText.setScrollFactor(0);
     }
 
-    loadItem(layer, collideCallback, Class) {
+    loadItem(layer, Class) {
         this.map.getObjectLayer(layer).objects
             .forEach((item) => {
                 const instance = new Class(this, item.x, item.y);
@@ -114,14 +114,15 @@ export default class Level1 extends Phaser.Scene {
                 this.physics.add.overlap(
                     instance,
                     this.player,
-                    collideCallback,
+                    instance.OnHit,
                     null,
-                    this,
+                    instance,
                 );
             });
     }
 
     increaseScore() {
+        if (this.gameFinished) return;
         this.score++;
         this.updateScore();
         this.coinMusic.play();
@@ -131,27 +132,20 @@ export default class Level1 extends Phaser.Scene {
         this.scoreText.setText(`SCORE: ${this.score}`);
     }
 
-    itemHit(sprite) {
-        sprite.destroy();
-    }
-
-    coinHit(sprite) {
-        this.itemHit(sprite);
-        this.increaseScore();
-    }
-
-    powerupHit(sprite) {
-        this.itemHit(sprite);
-        this.powerupMusic.play();
-    }
-
-    shyGuyHit(sprite) {
-        if (
-            this.player.body.velocity.y > 0 && this.player.body.touching.down && !this.player.body.touching.left && !this.player.body.touching.right
-        ) {
-            this.player.jump(this.delta);
-            this.increaseScore();
-            sprite.destroy();
+    destroyObject(object)
+    {
+        for( var i = 0; i < this.updateObjects.length; i++){ 
+            if ( this.updateObjects[i] === object)
+                this.updateObjects.splice(i, 1); 
         }
+        object.destroy();
+    }
+
+    onPlayerDied() {
+        if (this.gameFinished) return;
+        this.gameFinished = true;
+        this.music.stop();
+        this.gameOverSound.play();
+        setTimeout(() => this.scene.start('GameOver'), 2000);
     }
 }

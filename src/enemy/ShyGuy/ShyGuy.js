@@ -31,4 +31,16 @@ export default class ShyGuy extends Phaser.Physics.Arcade.Sprite {
         }
         this.setVelocityY(this.direction * 2 * delta);
     }
+
+    OnHit(sprite) {
+        if (this.body.touching.up) {
+            console.log("Hit");
+            this.scene.player.jump(this.scene.delta);
+            this.scene.increaseScore();
+            this.scene.destroyObject(this);
+        }
+        else{
+            this.scene.onPlayerDied();
+        }
+    }
 }
