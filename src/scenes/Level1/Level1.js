@@ -85,6 +85,7 @@ export default class Level1 extends Phaser.Scene {
             );
         // Habilitar colisión para Floor
         this.layer.setCollisionByExclusion(-1, true);
+
         // capa para detectar el mar
         this.seaLayer = this.map
             .createLayer(
@@ -96,6 +97,18 @@ export default class Level1 extends Phaser.Scene {
         // Habilitar colisión para Sea
         this.seaLayer.setCollisionByExclusion(-1, true);
         this.seaLayer.setVisible(false);
+
+        // capa para detectar la meta(Goal)
+        this.goalLayer = this.map
+            .createLayer(
+                'Goal',
+                this.map.addTilesetImage('Plataformas', 'tiles'),
+                0,
+                0,
+            );
+        // Habilitar colisión para Goal
+        this.goalLayer.setCollisionByExclusion(-1, true);
+        this.goalLayer.setVisible(false);
     }
 
     loadPhysics() {
@@ -140,6 +153,8 @@ export default class Level1 extends Phaser.Scene {
     }
 
     increaseScore() {
+        // quitar!!!
+        this.onPlayerWin();
         if (this.gameFinished) return;
         this.score++;
         this.updateScore();
@@ -164,6 +179,14 @@ export default class Level1 extends Phaser.Scene {
         this.music.stop();
         this.gameOverSound.play();
         setTimeout(() => this.scene.start('GameOver'), 1000);
+    }
+
+    onPlayerWin() {
+        this.gameFinished = true;
+        this.music.stop();
+        this.gameOverSound.play();
+        setTimeout(() => this.scene.start('Win'), 1000);
+        this.scene.stop('Layer1');
     }
 
     pauseGame() {

@@ -15,6 +15,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.setOffset((this.width - this.body.width) * 0.5, this.height * 0.25);
         this.scene.physics.add.collider(this, this.scene.layer);
         this.scene.physics.add.collider(this, this.scene.seaLayer, this.die, null, this);
+        this.scene.physics.add.collider(this, this.scene.goalLayer, this.win, null, this);
 
         this.anims.create({
             key: 'walk',
@@ -74,5 +75,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     die() {
         // llamar al PlayerDied de la escena
         this.scene.onPlayerDied();
+    }
+
+    win() {
+        this.scene.onPlayerWin();
     }
 }
