@@ -1,7 +1,7 @@
-export default class Win extends Phaser.Scene {
+export default class Pause extends Phaser.Scene {
     constructor() {
         super({
-            key: 'Win',
+            key: 'Pause',
         });
     }
 
@@ -18,23 +18,20 @@ export default class Win extends Phaser.Scene {
             .fillStyle(0x000000, 0.5)
             .fillRect(0, this.sys.game.config.height / 2 - 20, this.sys.game.config.width, 50);
 
-        this.pressX = this.add.bitmapText(this.sys.game.config.width / 2 - 75, this.sys.game.config.height / 2, 'font', 'YOU WIN!!\n\nPRESS X TO PLAY AGAIN', 10);
-        this.startKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
-
-        this.input.on('pointerdown', () => {
-            this.startGame();
-        });
+        this.pressX = this.add.bitmapText(this.sys.game.config.width / 2 - 75, this.sys.game.config.height / 2, 'font', 'PAUSED\n\nPRESS ESC TO RESUME', 10);
+        this.resumeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     }
 
     update() {
-        if (this.startKey.isDown) {
-            this.startGame();
+        if (this.resumeKey.isDown) {
+            this.resumeGame();
         }
     }
 
-    startGame() {
+    resumeGame() {
         this.music.stop();
         this.playMusic.play();
-        setTimeout(() => this.scene.start('Level1'), 2000);
+        this.scene.resume('Level1');
+        this.scene.stop('Pause');
     }
 }

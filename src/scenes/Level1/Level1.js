@@ -49,6 +49,9 @@ export default class Level1 extends Phaser.Scene {
                 this.updateObjects.splice(i, 1);
             }
         }
+        if (this.pauseKey.isDown) {
+            this.pauseGame();
+        }
     }
 
     ///
@@ -115,6 +118,10 @@ export default class Level1 extends Phaser.Scene {
         this.score = 0;
         this.scoreText = this.add.bitmapText(8, 8, 'font', `SCORE: ${this.score}`);
         this.scoreText.setScrollFactor(0);
+        // Pause text
+        this.pauseText = this.add.bitmapText(660, 8, 'font', 'PRESS ESC to PAUSE');
+        this.pauseText.setScrollFactor(0);
+        this.pauseKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     }
 
     loadItem(layer, Class) {
@@ -157,5 +164,10 @@ export default class Level1 extends Phaser.Scene {
         this.music.stop();
         this.gameOverSound.play();
         setTimeout(() => this.scene.start('GameOver'), 1000);
+    }
+
+    pauseGame() {
+        this.scene.pause();
+        this.scene.launch('Pause');
     }
 }

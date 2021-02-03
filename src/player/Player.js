@@ -73,7 +73,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     die() {
         // llamar al PlayerDied de la escena
-        console.log('died');
         this.scene.onPlayerDied();
     }
 }
