@@ -153,8 +153,6 @@ export default class Level1 extends Phaser.Scene {
     }
 
     increaseScore() {
-        // quitar!!!
-        this.onPlayerWin();
         if (this.gameFinished) return;
         this.score++;
         this.updateScore();
