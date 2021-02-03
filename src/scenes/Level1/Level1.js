@@ -10,7 +10,6 @@ export default class Level1 extends Phaser.Scene {
         });
         this.updateObjects = []; // Objetos que tienen un update()
         this.delta = 0;
-        this.gameFinished = false;
     }
 
     preload() {
@@ -23,10 +22,11 @@ export default class Level1 extends Phaser.Scene {
         this.powerupMusic = this.sound.add('powerup');
         this.coinMusic = this.sound.add('coin');
         this.gameOverSound = this.sound.add('gameover');
+        this.gameFinished = false;
     }
 
     create() {
-        this.music.play();
+        // this.music.play();
         this.loadBackground();
         this.loadMap();
         this.player = new Player(this, 50, 100);
@@ -82,6 +82,17 @@ export default class Level1 extends Phaser.Scene {
             );
         // Habilitar colisión para Floor
         this.layer.setCollisionByExclusion(-1, true);
+        // capa para detectar el mar
+        this.seaLayer = this.map
+            .createLayer(
+                'Sea',
+                this.map.addTilesetImage('Plataformas', 'tiles'),
+                0,
+                0,
+            );
+        // Habilitar colisión para Sea
+        this.seaLayer.setCollisionByExclusion(-1, true);
+        this.seaLayer.setVisible(false);
     }
 
     loadPhysics() {
@@ -141,9 +152,10 @@ export default class Level1 extends Phaser.Scene {
 
     onPlayerDied() {
         if (this.gameFinished) return;
+        this.player.setTint(0xff0000);
         this.gameFinished = true;
         this.music.stop();
         this.gameOverSound.play();
-        setTimeout(() => this.scene.start('GameOver'), 2000);
+        setTimeout(() => this.scene.start('GameOver'), 1000);
     }
 }

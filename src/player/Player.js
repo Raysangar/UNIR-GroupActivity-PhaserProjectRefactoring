@@ -14,6 +14,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.setSize(this.width * 0.3, this.height * 0.75);
         this.body.setOffset((this.width - this.body.width) * 0.5, this.height * 0.25);
         this.scene.physics.add.collider(this, this.scene.layer);
+        this.scene.physics.add.collider(this, this.scene.seaLayer, this.die, null, this);
 
         this.anims.create({
             key: 'walk',
@@ -68,5 +69,11 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     jump(delta) {
         this.setVelocityY(-15 * delta);
         this.jumpSound.play();
+    }
+
+    die() {
+        // llamar al PlayerDied de la escena
+        console.log('died');
+        this.scene.onPlayerDied();
     }
 }
