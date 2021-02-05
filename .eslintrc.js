@@ -20,6 +20,7 @@ module.exports = {
         "eol-last": ["error", "never"],
         "no-plusplus": ["off"],
         "class-methods-use-this": ["off"],
-        "max-len": ["error", 170]
+        "max-len": ["error", 170],
+        "no-nested-ternary": ["off"]
     }
 };

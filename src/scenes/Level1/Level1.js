@@ -19,14 +19,12 @@ export default class Level1 extends Phaser.Scene {
         // });
 
         this.music = this.sound.add('level1Music', { loop: true });
-        this.powerupMusic = this.sound.add('powerup');
-        this.coinMusic = this.sound.add('coin');
-        this.gameOverSound = this.sound.add('gameover');
-        this.gameFinished = false;
+        this.powerupSound = this.sound.add('powerup');
+        this.coinSound = this.sound.add('coin');
     }
 
     create() {
-        // this.music.play();
+        this.music.play();
         this.loadBackground();
         this.loadMap();
         this.player = new Player(this, 50, 100);
@@ -153,10 +151,9 @@ export default class Level1 extends Phaser.Scene {
     }
 
     increaseScore() {
-        if (this.gameFinished) return;
         this.score++;
         this.updateScore();
-        this.coinMusic.play();
+        this.coinSound.play();
     }
 
     updateScore() {
@@ -171,20 +168,13 @@ export default class Level1 extends Phaser.Scene {
     }
 
     onPlayerDied() {
-        if (this.gameFinished) return;
-        this.player.setTint(0xff0000);
-        this.gameFinished = true;
         this.music.stop();
-        this.gameOverSound.play();
-        setTimeout(() => this.scene.start('GameOver'), 1000);
+        this.scene.start('Start', { gameover: true });
     }
 
     onPlayerWin() {
-        this.gameFinished = true;
         this.music.stop();
-        this.gameOverSound.play();
-        setTimeout(() => this.scene.start('Win'), 1000);
-        this.scene.stop('Layer1');
+        this.scene.start('Start', { win: true });
     }
 
     pauseGame() {

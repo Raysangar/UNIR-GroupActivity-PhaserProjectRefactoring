@@ -9,7 +9,7 @@ export default class Mushroom extends Phaser.Physics.Arcade.Sprite {
     }
 
     OnHit() {
-        this.scene.powerupMusic.play();
+        this.scene.powerupSound.play();
         this.scene.destroyObject(this);
     }
 }

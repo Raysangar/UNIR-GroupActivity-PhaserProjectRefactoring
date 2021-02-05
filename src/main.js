@@ -1,8 +1,6 @@
 import Boot from './scenes/Boot/Boot';
 import Start from './scenes/Start/Start';
 import Level1 from './scenes/Level1/Level1';
-import GameOver from './scenes/GameOver/GameOver';
-import Win from './scenes/Win/Win';
 import Pause from './scenes/Pause/Pause';
 
 const config = {
@@ -24,8 +22,6 @@ const config = {
         Boot,
         Start,
         Level1,
-        GameOver,
-        Win,
         Pause,
     ],
 };

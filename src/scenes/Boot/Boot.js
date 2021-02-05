@@ -41,11 +41,11 @@ export default class Boot extends Phaser.Scene {
         this.load.audio('startMusic', 'src/scenes/Start/music.mp3');
         this.load.audio('playMusic', 'src/scenes/Start/play.mp3');
         this.load.audio('level1Music', 'src/scenes/Level1/music.mp3');
-        this.load.audio('score', 'src/scenes/score.mp3');
+        this.load.audio('gameoverMusic', 'src/scenes/Start/gameover.mp3');
+        this.load.audio('winMusic', 'src/scenes/Start/win.mp3');
         this.load.audio('jump', 'src/player/jump.mp3');
         this.load.audio('powerup', 'src/powerup/powerup.wav');
         this.load.audio('coin', 'src/coin/coin.wav');
-        this.load.audio('gameover', 'src/scenes/gameover.mp3');
         this.load.image('startBackground', 'src/scenes/Start/background.jpg');
         this.load.image('tiles', 'src/scenes/Level1/background/tileset.png');
         this.load.spritesheet('tilesSprites', 'src/scenes/Level1/background/tileset.png', { frameWidth: 32, frameHeight: 32 });
